@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マルバツゲーム【TicTocToe game build in JavaScript】</title>
+    <style>
+        #main{
+            background-color: rgb(59, 157, 255);
+            width: 300px;
+            height: 300px;
+            padding: 20px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        h1{
+            text-align: center;
+        }
+        #board{
+            background-color: black;
+            display: inline-block;
+        }
+        .cell{
+            background-color: lightgreen;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            font-size: 40px;
+        }
+        #info{
+            height: 1em;
+        }
+        button{
+            width: 100px;
+            height: 30px;
+            background-color: darkorange;
+            border-radius: 10px;
+        }
+    </style>
+    <script>
+        var XorO = ['⭕','❌'];
+        function init(){
+            index = 0;
+            var b = document.getElementById('board');
+            if (b.firstChild) {
+                while(b.firstChild){
+                    b.removeChild(b.firstChild);
+                }
+                document.getElementById('info').textContent = null;
+            }
+        for (let i = 0; i < 3; i++) {
+            var tr = document.createElement('tr');
+            for (let j = 0; j < 3; j++) {
+                var td = document.createElement('td');
+                td.className = 'cell';
+                td.id = 'cell'+i+j
+                td.onclick = clicked;
+                tr.appendChild(td);
+            }
+            b.appendChild(tr);
+        }
+        }
+        function clicked(e){
+            var info = document.getElementById('info');
+            
+            
+            if(document.getElementById(e.target.id).innerText === ''){
+                info.textContent = e.target.id + ' clicked!';
+                index = ++index % XorO.length;
+                document.getElementById(e.target.id).innerText = XorO[index];
+            }else{
+                info.textContent = e.target.id + ' can\'t click!';
+            }
+        }
+        
+    </script>
+</head>
+<body>
+    <h1>マルバツゲーム【TicTocToe】</h1>
+    <div id="main">
+        <button onclick="init()">Game Start!</button>
+    <h2 id="info"></h2>
+    <table id="board">
+
+    </table>
+    </div>
+    
+</body>
+</html>
